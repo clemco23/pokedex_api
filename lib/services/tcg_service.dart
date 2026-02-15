@@ -29,13 +29,13 @@ class TcgService {
 
     final List<dynamic> cards = json.decode(response.body);
 
-    // Skip les IDs invalides du style "exu-?"
+    
     final ids = cards
         .map((c) => (c as Map<String, dynamic>)["id"]?.toString() ?? "")
         .where((id) => id.isNotEmpty && !id.contains("?"))
         .toList();
 
-    // IMPORTANT: si une carte 404, on ne veut pas faire tomber toute la page
+    
     final detailed = await Future.wait(
       ids.map((id) async {
         try {
